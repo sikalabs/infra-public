@@ -8,7 +8,7 @@ locals {
     crc = merge(local.default_do_vm, {
       droplet_name = "crc"
       record_name  = "crc"
-      size         = "s-4vcpu-8gb"
+      size         = "s-8vcpu-16gb"
     })
   }
   vms = {
