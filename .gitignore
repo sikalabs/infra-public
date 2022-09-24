@@ -1,0 +1,10 @@
+.DS_Store
+.vscode
+.terraform
+*.tfvars
+!*.EXAMPLE.tfvars
+*.tfstate
+*.tfstate*backup
+*.log
+.terraform.tfstate.lock.info
+.infracost
