@@ -8,6 +8,7 @@ locals {
     crc = merge(local.default_do_vm, {
       droplet_name = "crc"
       record_name  = "crc"
+      image        = local.IMAGE.CENTOS
       size         = "s-8vcpu-16gb"
     })
   }
