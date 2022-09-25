@@ -14,6 +14,8 @@ runcmd:
     install-slu install --version v0.52.0-dev-1
     slu install-bin oc
     slu install-bin openshift-install
+    slu install-bin kubectl
+    slu install-bin helm
 EOF
   vm_templates = {
     lab = merge(var.default_do_vm, {
