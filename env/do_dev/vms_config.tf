@@ -13,6 +13,5 @@ locals {
     })
   }
   vms = {
-    crc = local.vm_templates.crc
   }
 }
