@@ -11,6 +11,9 @@ runcmd:
     apt-get update
     apt-get install -y curl sudo git mc htop vim tree
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+    install-slu install --version v0.52.0-dev-1
+    slu install-bin oc
+    slu install-bin openshift-install
 EOF
   vm_templates = {
     lab = merge(var.default_do_vm, {
