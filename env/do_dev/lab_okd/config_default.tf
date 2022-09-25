@@ -5,6 +5,13 @@ ssh_pwauth: yes
 password: asdfasdf1234
 chpasswd:
   expire: false
+write_files:
+- path: /usr/local/bin/k
+  permissions: "0755"
+  owner: root:root
+  content: |
+    #!/bin/sh
+    kubectl $@
 runcmd:
   - |
     rm -rf /etc/update-motd.d/99-one-click
