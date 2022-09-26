@@ -23,6 +23,9 @@ runcmd:
     slu install-bin openshift-install
     slu install-bin kubectl
     slu install-bin helm
+    mkdir -p /root/training
+    git clone https://github.com/ondrejsika/okd-training /root/training/okd
+    git clone https://github.com/ondrejsika/kubernetes-training /root/training/kubernetes
 EOF
   vm_templates = {
     lab = merge(var.default_do_vm, {
