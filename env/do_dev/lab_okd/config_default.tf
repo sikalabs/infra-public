@@ -31,6 +31,7 @@ EOF
     lab = merge(var.default_do_vm, {
       droplet_name = "lab-okd-"
       record_name  = "lab"
+      user_data    = local.default_user_data
     })
   }
 }
