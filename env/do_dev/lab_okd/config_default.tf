@@ -26,7 +26,7 @@ runcmd:
 EOF
   vm_templates = {
     lab = merge(var.default_do_vm, {
-      droplet_name = "lab-okd"
+      droplet_name = "lab-okd-"
       record_name  = "lab"
     })
   }
