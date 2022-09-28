@@ -8,3 +8,7 @@
 *.log
 .terraform.tfstate.lock.info
 .infracost
+
+kubeconfig/*
+kubeconfig.*
+!.keep
