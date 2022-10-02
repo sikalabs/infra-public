@@ -31,6 +31,6 @@ EOF
     })
   }
   vms = {
-    nfs = local.vm_templates.nfs
+    # nfs = local.vm_templates.nfs
   }
 }
