@@ -3,6 +3,11 @@ module "lab_okd" {
   default_do_vm = local.default_do_vm
 }
 
+module "lab_kubernetes" {
+  source        = "./lab_kubernetes"
+  default_do_vm = local.default_do_vm
+}
+
 module "kuberneres" {
   source = "./kubernetes"
   config = {
