@@ -23,9 +23,9 @@ locals {
 
 locals {
   kubernetes = {
-    "0" = merge(local.default, {
-      cluster_name = "k8s"
-      record_name  = "k8s"
-    })
+    # "0" = merge(local.default, {
+    #   cluster_name = "k8s"
+    #   record_name  = "k8s"
+    # })
   }
 }
