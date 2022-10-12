@@ -20,7 +20,6 @@ runcmd:
     systemctl stop ufw
     systemctl disable ufw
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
-    install-slu install -v v0.53.0-dev-4
     slu install-bin crane
     slu install-bin reg
 EOF
