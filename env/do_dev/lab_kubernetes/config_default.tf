@@ -16,7 +16,7 @@ runcmd:
   - |
     rm -rf /etc/update-motd.d/99-one-click
     apt update
-    apt install curl sudo git mc
+    apt install -y curl sudo git mc redis-tools htop vim tree
     systemctl stop ufw
     systemctl disable ufw
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
