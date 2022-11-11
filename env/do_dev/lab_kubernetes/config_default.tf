@@ -20,7 +20,7 @@ runcmd:
     systemctl stop ufw
     systemctl disable ufw
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
-    slu install-bin training-cli -v v0.4.2
+    slu install-bin training-cli -v v0.5.0-dev-7
     HOME=/root training-cli kubernetes vm-setup
 EOF
   vm_templates = {
