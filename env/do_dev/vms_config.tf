@@ -25,7 +25,7 @@ runcmd:
     apt-get update
     apt-get install -y nfs-kernel-server
     mkdir /nfs
-    echo '/nfs *(rw,no_root_squash)' > /etc/exports
+    echo '/nfs *(rw,no_root_squash,insecure)' > /etc/exports
     systemctl restart nfs-kernel-server
 EOF
     })
