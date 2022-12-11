@@ -17,7 +17,7 @@ locals {
     node_count            = 3
     kubernetes_version    = local.DEFAULT.KUBERNETES_VERSION
     zone_id               = local.DEFAULT.ZONE_ID
-    enable_proxy_protocol = true
+    enable_proxy_protocol = false
   }
 }
 
