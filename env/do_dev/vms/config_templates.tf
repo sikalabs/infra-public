@@ -78,6 +78,7 @@ runcmd:
     # Docker
     slu install-bin crane
     slu install-bin reg
-    
+    # Terraform
+    slu install-bin terraform
 EOF
 }
