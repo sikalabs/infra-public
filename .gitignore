@@ -12,3 +12,5 @@
 kubeconfig/*
 kubeconfig.*
 !.keep
+
+node_modules
