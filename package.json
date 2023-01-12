@@ -1,0 +1,14 @@
+{
+  "name": "infra-public",
+  "version": "0.0.0",
+  "repository": "https://github.com/sikalabs/infra-public.git",
+  "author": "Ondrej Sika <ondrej@ondrejsika.com>",
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^2.8.2"
+  },
+  "scripts": {
+    "prettier-check": "prettier --check .",
+    "prettier-write": "prettier --write ."
+  }
+}
