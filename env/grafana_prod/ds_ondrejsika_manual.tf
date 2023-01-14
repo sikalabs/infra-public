@@ -29,3 +29,23 @@ resource "grafana_data_source" "ondrejsika-manual-elasticsearch-joh" {
     basicAuthPassword = var.kibana_joh_password
   })
 }
+
+resource "grafana_data_source" "ondrejsika-manual-postgres-tergum_telemetry" {
+  provider = grafana.ondrejsika-manual
+  type     = "postgres"
+  name     = "Tergum Telemetry DB"
+  uid      = "postgres-tergum_telemetry"
+
+  url           = "db0.oxs.cz"
+  username      = "postgres"
+  database_name = "tergum_telemetry"
+
+  json_data_encoded = jsonencode({
+    "postgresVersion" = 1000
+    "sslmode"         = "disable"
+  })
+
+  secure_json_data_encoded = jsonencode({
+    "password" = "thisispostgresbaby"
+  })
+}

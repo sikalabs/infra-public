@@ -17,3 +17,8 @@ resource "grafana_dashboard" "ondrejsika-logs-all" {
   provider    = grafana.ondrejsika
   config_json = file("./dashboards/logs-all.json")
 }
+
+resource "grafana_dashboard" "ondrejsika-tergum" {
+  provider    = grafana.ondrejsika
+  config_json = file("./dashboards/tergum.json")
+}
