@@ -12,3 +12,8 @@ resource "grafana_dashboard" "ondrejsika-prometheus-alerts" {
   provider    = grafana.ondrejsika
   config_json = file("./dashboards/prometheus-alerts.json")
 }
+
+resource "grafana_dashboard" "ondrejsika-logs-all" {
+  provider    = grafana.ondrejsika
+  config_json = file("./dashboards/logs-all.json")
+}
