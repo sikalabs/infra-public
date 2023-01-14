@@ -22,6 +22,7 @@ resource "grafana_data_source" "ondrejsika-manual-elasticsearch-joh" {
       logMessageField            = ""
       maxConcurrentShardRequests = 5
       timeField                  = "@timestamp"
+      logMessageField            = "message"
     }
   )
   secure_json_data_encoded = jsonencode({
