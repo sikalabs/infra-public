@@ -8,6 +8,7 @@
 *.log
 .terraform.tfstate.lock.info
 .infracost
+override.tf
 
 kubeconfig/*
 kubeconfig.*
