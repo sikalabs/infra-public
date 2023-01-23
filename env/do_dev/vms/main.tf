@@ -4,6 +4,18 @@ locals {
     #   droplet_name = "nfs"
     #   record_name  = "nfs"
     # })
+    # es = merge(local.template_es, {
+    #   droplet_name = "es"
+    #   record_name  = "es"
+    # })
+    # kb = merge(local.template_kb, {
+    #   droplet_name = "kb"
+    #   record_name  = "kb"
+    # })
+    # nginx0 = merge(local.template_nginx, {
+    #   droplet_name = "nginx"
+    #   record_name  = "nginx"
+    # })
   }
   vms_lab = {
     # "0" = merge(local.template_lab, {})
