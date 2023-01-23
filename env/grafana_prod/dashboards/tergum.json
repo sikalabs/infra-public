@@ -84,9 +84,7 @@
       "options": {
         "footer": {
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true,
@@ -113,33 +111,25 @@
           "select": [
             [
               {
-                "params": [
-                  "telemetry_name"
-                ],
+                "params": ["telemetry_name"],
                 "type": "column"
               }
             ],
             [
               {
-                "params": [
-                  "cloud_email"
-                ],
+                "params": ["cloud_email"],
                 "type": "column"
               }
             ],
             [
               {
-                "params": [
-                  "version"
-                ],
+                "params": ["version"],
                 "type": "column"
               }
             ],
             [
               {
-                "params": [
-                  "hostname"
-                ],
+                "params": ["hostname"],
                 "type": "column"
               }
             ]
@@ -156,11 +146,7 @@
             {
               "datatype": "text",
               "name": "",
-              "params": [
-                "event_name",
-                "=",
-                "'init/v2'"
-              ],
+              "params": ["event_name", "=", "'init/v2'"],
               "type": "expression"
             }
           ]
