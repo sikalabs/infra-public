@@ -55,6 +55,15 @@ write_files:
   content: |
     #!/bin/sh
     kubectl $@
+write_files:
+- path: /root/.zshrc.default
+  permissions: "0755"
+  owner: root:root
+  content: |
+    export ZSH="$HOME/.oh-my-zsh"
+    plugins=(git kube-ps1)
+    ZSH_THEME=alanpeabody
+    source $ZSH/oh-my-zsh.sh
 - path: /root/.config/code-server/config.yaml
   permissions: "0755"
   owner: root:root
@@ -62,11 +71,18 @@ write_files:
     auth: password
     password: asdfasdf2020
     cert: false
+- path: /root/.local/share/code-server/User/settings.json
+  permissions: "0755"
+  owner: root:root
+  content: |
+    {
+      "terminal.integrated.shell.linux": "/bin/zsh"
+    }
 runcmd:
   - |
     rm -rf /etc/update-motd.d/99-one-click
     apt update
-    apt install -y curl sudo git mc redis-tools htop vim tree
+    apt install -y curl sudo git mc redis-tools htop vim tree zsh
     systemctl stop ufw
     systemctl disable ufw
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
@@ -80,5 +96,24 @@ runcmd:
     slu install-bin reg
     # Terraform
     slu install-bin terraform
+    slu install-bin kubectl
+    slu install-bin helm
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    cp /root/.zshrc.default /root/.zshrc
+    echo "alias k=kubectl" >> /root/.zshrc
+    echo "alias kx=kubectx" >> /root/.zshrc
+    echo "alias kn=kubens" >> /root/.zshrc
+    echo "source <(kubectl completion zsh)" >> /root/.zshrc
+    echo "source <(helm completion zsh)" >> /root/.zshrc
+    echo "source <(slu completion zsh)" >> /root/.zshrc
+    echo 'alias w="watch -n 0.3 "' >> /root/.zshrc
+    echo ". <(slu completion zsh); compdef _slu slu" >> /root/.zshrc
+    echo ". <(training-cli completion zsh); compdef _training-cli training-cli" >> /root/.zshrc
+    chsh -s /bin/zsh
+    slu install-bin filebeat
+    wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+    sudo apt-get install -y apt-transport-https
+    echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+    sudo apt-get update
 EOF
 }
