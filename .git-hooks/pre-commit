@@ -1,4 +1,4 @@
 #!/bin/sh
 
 make tf-fmt-check
-make prettier-fmt
+make prettier-fmt-check
