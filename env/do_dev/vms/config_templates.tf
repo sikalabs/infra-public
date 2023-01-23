@@ -9,8 +9,31 @@ locals {
     ssh_keys  = local.ssh_keys
     vpc_uuid  = null
   }
+  template_es = merge(local.template_default, {
+    size = "s-2vcpu-4gb"
+  })
+  template_rke1 = merge(local.template_default, {
+    size      = "s-2vcpu-4gb"
+    image     = local.IMAGE.DOCKER
+    user_data = local.user_data_rke1
+  })
+  template_kb = merge(local.template_default, {
+    size = "s-1vcpu-2gb"
+  })
   template_nfs = merge(local.template_default, {
     user_data = local.nfs_user_data
+  })
+  template_nginx = merge(local.template_default, {
+    user_data = <<EOF
+#cloud-config
+runcmd:
+  - |
+    rm -rf /etc/update-motd.d/99-one-click
+    apt-get update
+    apt-get install -y curl sudo git mc htop vim tree
+    curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+    apt-get install -y nginx
+EOF
   })
   template_lab = merge(local.template_default, {
     image        = local.IMAGE.DOCKER
@@ -27,6 +50,17 @@ runcmd:
     apt-get update
     apt-get install -y curl sudo git mc htop vim tree
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+EOF
+  user_data_rke1    = <<EOF
+#cloud-config
+runcmd:
+  - |
+    rm -rf /etc/update-motd.d/99-one-click
+    apt-get update
+    apt-get install -y curl sudo git mc htop vim tree
+    curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+    systemctl stop ufw
+    systemctl disable ufw
 EOF
   nfs_user_data     = <<EOF
 #cloud-config
