@@ -17,6 +17,9 @@ locals {
     #   record_name  = "nginx"
     # })
   }
+  vms_generic_simple = {
+    # example = merge(local.template_rke1, {}),
+  }
   vms_lab = {
     # "0" = merge(local.template_lab, {})
   }
@@ -29,6 +32,22 @@ module "vms_generic" {
 
   droplet_name = each.value.droplet_name
   record_name  = each.value.record_name
+  image        = each.value.image
+  region       = each.value.region
+  size         = each.value.size
+  user_data    = each.value.user_data
+  zone_id      = each.value.zone_id
+  vpc_uuid     = each.value.vpc_uuid
+  ssh_keys     = each.value.ssh_keys
+}
+
+module "vms_generic_simple" {
+  source = "../../../modules/core/do_vm"
+
+  for_each = local.vms_generic_simple
+
+  droplet_name = each.key
+  record_name  = each.key
   image        = each.value.image
   region       = each.value.region
   size         = each.value.size
