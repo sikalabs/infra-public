@@ -22,3 +22,8 @@ resource "grafana_dashboard" "ondrejsika-tergum" {
   provider    = grafana.ondrejsika
   config_json = file("./dashboards/tergum.json")
 }
+
+resource "grafana_dashboard" "ondrejsika-nginx-ingress-9614" {
+  provider    = grafana.ondrejsika
+  config_json = file("./dashboards/nginx-ingress-9614.json")
+}
