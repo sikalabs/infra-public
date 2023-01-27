@@ -49,3 +49,11 @@ resource "grafana_data_source" "ondrejsika-manual-postgres-tergum_telemetry" {
     "password" = "thisispostgresbaby"
   })
 }
+
+resource "grafana_data_source" "ondrejsika-manual-prometheus-panda-ingress-os" {
+  provider = grafana.ondrejsika-manual
+  type     = "prometheus"
+  uid      = "prometheus-panda-ingress-os"
+  name     = "prometheus-panda-ingress-os"
+  url      = "https://prometheus-ingress.panda.k8s.oxs.cz"
+}
