@@ -115,36 +115,65 @@ write_files:
 runcmd:
   - |
     rm -rf /etc/update-motd.d/99-one-click
-    apt update
-    apt install -y curl sudo git mc redis-tools htop vim tree zsh
     systemctl stop ufw
     systemctl disable ufw
-    curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
-    slu install-bin training-cli -v v0.5.0-dev-7
-    HOME=/root training-cli kubernetes vm-setup
-    curl -fsSL https://code-server.dev/install.sh | HOME=/root sh
-    systemctl enable --now code-server@root
-    docker run -d --name proxy-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :80 -r 127.0.0.1:8080
-    # Docker
-    slu install-bin crane
-    slu install-bin reg
-    # Terraform
-    slu install-bin terraform
-    slu install-bin kubectl
-    slu install-bin helm
+
+    apt update
+
+    # Zsh
+    apt-get install -y zsh
+    chsh -s /bin/zsh
+
+    # Oh My Zsh
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     cp /root/.zshrc.default /root/.zshrc
+
+    # slu
+    apt install -y curl
+    curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sh
+
+    # code-server
+    curl -fsSL https://code-server.dev/install.sh | HOME=/root sh
+    systemctl enable --now code-server@root
+    docker run -d --name proxy-80-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :80 -r 127.0.0.1:8080
+    docker run -d --name proxy-81-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :81 -r 127.0.0.1:8080
+
+    # apt-get install
+    apt install -y sudo git mc redis-tools htop vim tree
+
+    # training-cli
+    slu install-bin training-cli -v v0.5.0-dev-7
+
+    # Ondrej Sika
+    echo "source <(slu completion zsh)" >> /root/.zshrc
+    echo "source <(training-cli completion zsh)" >> /root/.zshrc
+
+    # Docker
+    slu install-bin docker-compose
+    slu install-bin crane
+    slu install-bin reg
+
+    # Kubernetes
+    slu install-bin kubectl
+    slu install-bin helm
+
+    echo "source <(kubectl completion zsh)" >> /root/.zshrc
+    echo "source <(helm completion zsh)" >> /root/.zshrc
+
     echo "alias k=kubectl" >> /root/.zshrc
     echo "alias kx=kubectx" >> /root/.zshrc
     echo "alias kn=kubens" >> /root/.zshrc
-    echo "source <(kubectl completion zsh)" >> /root/.zshrc
-    echo "source <(helm completion zsh)" >> /root/.zshrc
-    echo "source <(slu completion zsh)" >> /root/.zshrc
+
+    # Terraform
+    slu install-bin terraform
+
+    # Aliases
     echo 'alias w="watch -n 0.3 "' >> /root/.zshrc
-    echo ". <(slu completion zsh); compdef _slu slu" >> /root/.zshrc
-    echo ". <(training-cli completion zsh); compdef _training-cli training-cli" >> /root/.zshrc
-    chsh -s /bin/zsh
+    echo 'alias dra="slu s dra"' >> /root/.zshrc
+
+    # Elastic Stack
     slu install-bin filebeat
+
     wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
     sudo apt-get install -y apt-transport-https
     echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
