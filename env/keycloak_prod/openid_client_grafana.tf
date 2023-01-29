@@ -17,7 +17,6 @@ resource "keycloak_openid_client_default_scopes" "grafana" {
   realm_id  = keycloak_realm.sikalabs.id
   client_id = keycloak_openid_client.grafana.id
   default_scopes = [
-    "openid",
     "profile",
     "email",
     keycloak_openid_client_scope.sikalabs_groups.name,

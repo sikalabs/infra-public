@@ -9,9 +9,13 @@ resource "grafana_user" "ondrej-admin" {
 }
 
 resource "grafana_user" "ondrej" {
+  lifecycle {
+    ignore_changes = [
+      name,
+    ]
+  }
   email    = "ondrej@sika.io"
-  name     = "Ondrej Sika"
-  login    = "ondrej"
-  password = var.ondrej_password
+  login    = "ondrej@sika.io"
   is_admin = false
+  password = var.ondrej_password
 }
