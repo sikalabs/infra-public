@@ -72,3 +72,13 @@ module "vms_lab" {
   vpc_uuid     = each.value.vpc_uuid
   ssh_keys     = each.value.ssh_keys
 }
+
+resource "cloudflare_record" "vms_lab" {
+  for_each = local.vms_lab
+
+  zone_id = each.value.zone_id
+  name    = "*.${module.vms_lab[each.key].cloudflare_record.name}"
+  value   = module.vms_lab[each.key].cloudflare_record.hostname
+  type    = "CNAME"
+  proxied = false
+}
