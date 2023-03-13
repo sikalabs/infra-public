@@ -11,3 +11,11 @@ resource "keycloak_user" "ondrej" {
     temporary = true
   }
 }
+
+resource "keycloak_user_groups" "ondrej" {
+  realm_id = keycloak_realm.sikalabs.id
+  user_id  = keycloak_user.ondrej.id
+  group_ids = [
+    keycloak_group.argocd-admin.id,
+  ]
+}
