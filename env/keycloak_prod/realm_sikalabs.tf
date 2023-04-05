@@ -6,6 +6,16 @@ resource "keycloak_realm" "sikalabs" {
   login_theme              = "sikalabs"
 }
 
+resource "keycloak_realm_events" "sikalabs" {
+  realm_id = keycloak_realm.sikalabs.id
+
+  events_enabled    = true
+  events_expiration = 3600
+
+  admin_events_enabled         = true
+  admin_events_details_enabled = true
+}
+
 resource "keycloak_openid_client_scope" "sikalabs_groups" {
   realm_id               = keycloak_realm.sikalabs.id
   name                   = "groups"
