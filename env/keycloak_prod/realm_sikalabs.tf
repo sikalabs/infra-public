@@ -3,6 +3,7 @@ resource "keycloak_realm" "sikalabs" {
   enabled                  = true
   display_name_html        = "<h1>SikaLabs SSO</h1>"
   login_with_email_allowed = true
+  login_theme              = "sikalabs"
 }
 
 resource "keycloak_openid_client_scope" "sikalabs_groups" {
