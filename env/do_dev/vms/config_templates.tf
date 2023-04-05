@@ -139,7 +139,7 @@ runcmd:
     docker run -d --name proxy-81-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :81 -r 127.0.0.1:8080
 
     # apt-get install
-    apt install -y sudo git mc redis-tools htop vim tree
+    apt install -y sudo git mc redis-tools htop vim tree make
 
     # training-cli
     slu install-bin training-cli -v v0.5.0-dev-7
