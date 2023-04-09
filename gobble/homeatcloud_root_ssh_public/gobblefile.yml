@@ -1,0 +1,27 @@
+meta:
+  schema_version: 3
+hosts:
+  all:
+    - ssh_target: debian@sl-prod-gitlab.ip.sl.zone
+    - ssh_target: debian@sl-prod-vpn.ip.sl.zone
+plays:
+  - name: Add SSH Keys to root
+    hosts: [all]
+    sudo: true
+    tasks:
+      - name: "Add SSH Key: ondrejsika"
+        command:
+          cmd: 'sh -c "mkdir -p /root/.ssh/ && echo \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCslNKgLyoOrGDerz9pA4a4Mc+EquVzX52AkJZz+ecFCYZ4XQjcg2BK1P9xYfWzzl33fHow6pV/C6QC3Fgjw7txUeH7iQ5FjRVIlxiltfYJH4RvvtXcjqjk8uVDhEcw7bINVKVIS856Qn9jPwnHIhJtRJe9emE7YsJRmNSOtggYk/MaV2Ayx+9mcYnA/9SBy45FPHjMlxntoOkKqBThWE7Tjym44UNf44G8fd+kmNYzGw9T5IKpH1E1wMR+32QJBobX6d7k39jJe8lgHdsUYMbeJOFPKgbWlnx9VbkZh+seMSjhroTgniHjUl8wBFgw0YnhJ/90MgJJL4BToxu9PVnH\" > /root/.ssh/authorized_keys"'
+  - name: Set DNS to 1.1.1.1
+    hosts: [all]
+    sudo: true
+    tasks:
+      - name: "systemctl stop systemd-resolved"
+        command:
+          cmd: "systemctl stop systemd-resolved.service"
+      - name: "systemctl disable systemd-resolved"
+        command:
+          cmd: "systemctl disable systemd-resolved.service"
+      - name: "Set DNS to 1.1.1.1 in resolv.conf"
+        command:
+          cmd: 'sh -c "echo \"nameserver 1.1.1.1\" > /etc/resolv.conf"'
