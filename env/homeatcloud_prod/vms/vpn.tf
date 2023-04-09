@@ -8,7 +8,7 @@ module "vpn" {
   image_id      = "f97b70b4-8c03-455f-bc6a-24717fd664aa"
   key_pair_name = openstack_compute_keypair_v2.ondrejsika.name
   volume_size   = 5
-  flavor_id     = "11"
+  flavor_id     = local.FLAVORS.FLAVOR_1CPU_1RAM
   network_interfaces = [
     {
       name        = "network_f2d2d74cea2d4f34a7b06921f5a177fc"
