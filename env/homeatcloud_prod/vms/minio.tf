@@ -1,5 +1,5 @@
 locals {
-  MINIO_IP = "194.213.36.36"
+  MINIO_IP = "194.213.36.173"
 }
 
 module "minio" {

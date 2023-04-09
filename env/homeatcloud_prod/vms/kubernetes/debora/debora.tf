@@ -2,7 +2,7 @@ variable "FLAVORS" {}
 variable "ssh_key_name" {}
 
 locals {
-  DEBORA_IP = "194.213.36.18"
+  DEBORA_IP = "194.213.36.178"
 }
 
 module "debora-proxy" {

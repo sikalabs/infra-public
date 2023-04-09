@@ -1,5 +1,5 @@
 locals {
-  VPN_IP = "194.213.36.178"
+  VPN_IP = "194.213.36.18"
 }
 
 module "vpn" {

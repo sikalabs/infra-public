@@ -1,5 +1,5 @@
 locals {
-  GITLAB_IP = "194.213.36.173"
+  GITLAB_IP = "194.213.36.36"
 }
 
 module "gitlab" {
