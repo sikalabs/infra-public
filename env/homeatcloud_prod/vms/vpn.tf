@@ -11,8 +11,8 @@ module "vpn" {
   flavor_id     = local.FLAVORS.FLAVOR_1CPU_1RAM
   network_interfaces = [
     {
-      name        = "network_f2d2d74cea2d4f34a7b06921f5a177fc"
-      fixed_ip_v4 = "192.168.0.10"
+      name        = "default"
+      fixed_ip_v4 = "10.54.81.10"
     },
   ]
 

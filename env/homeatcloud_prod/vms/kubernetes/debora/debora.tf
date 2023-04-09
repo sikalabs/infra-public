@@ -14,8 +14,8 @@ module "debora-proxy" {
   flavor_id     = var.FLAVORS.FLAVOR_1CPU_1RAM
   network_interfaces = [
     {
-      name        = "network_f2d2d74cea2d4f34a7b06921f5a177fc"
-      fixed_ip_v4 = "192.168.0.50"
+      name        = "default"
+      fixed_ip_v4 = "10.54.81.50"
     },
   ]
 
@@ -38,8 +38,8 @@ module "debora1" {
   flavor_id     = var.FLAVORS.FLAVOR_8CPU_8RAM
   network_interfaces = [
     {
-      name        = "network_f2d2d74cea2d4f34a7b06921f5a177fc"
-      fixed_ip_v4 = "192.168.0.51"
+      name        = "default"
+      fixed_ip_v4 = "10.54.81.51"
     },
   ]
 
@@ -57,8 +57,8 @@ module "debora2" {
   flavor_id     = var.FLAVORS.FLAVOR_8CPU_8RAM
   network_interfaces = [
     {
-      name        = "network_f2d2d74cea2d4f34a7b06921f5a177fc"
-      fixed_ip_v4 = "192.168.0.52"
+      name        = "default"
+      fixed_ip_v4 = "10.54.81.52"
     },
   ]
 
@@ -76,8 +76,8 @@ module "debora3" {
   flavor_id     = var.FLAVORS.FLAVOR_4CPU_4RAM
   network_interfaces = [
     {
-      name        = "network_f2d2d74cea2d4f34a7b06921f5a177fc"
-      fixed_ip_v4 = "192.168.0.53"
+      name        = "default"
+      fixed_ip_v4 = "10.54.81.53"
     },
   ]
 
