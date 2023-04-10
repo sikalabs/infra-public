@@ -1,6 +1,9 @@
 run:
 	gobble run
 
+run-proxy:
+	gobble run --only-tag proxy
+
 get-kubeconfig:
 	gobble run --only-tag get-kubeconfig
 
