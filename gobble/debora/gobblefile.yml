@@ -144,6 +144,10 @@ plays:
               bind 0.0.0.0:443
               default_backend https
 
+            frontend nodeports
+              bind 0.0.0.0:30000-32767
+              default_backend nodeports
+
             backend http
               {{ range $i, $server := .Config.Hosts.wo }}
               server backend-http-{{$i}} {{$server.Vars.backend}}:80
@@ -152,6 +156,11 @@ plays:
             backend https
               {{ range $i, $server := .Config.Hosts.wo }}
               server backend-https-{{$i}} {{$server.Vars.backend}}:443
+              {{ end }}
+
+            backend nodeports
+              {{ range $i, $server := .Config.Hosts.wo }}
+              server backend-nodeports-{{$i}} {{$server.Vars.backend}}
               {{ end }}
 
       - name: Restart HAProxy
