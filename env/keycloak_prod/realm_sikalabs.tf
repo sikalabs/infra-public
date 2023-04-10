@@ -4,6 +4,8 @@ resource "keycloak_realm" "sikalabs" {
   display_name_html        = "<h1>SikaLabs SSO</h1>"
   login_with_email_allowed = true
   login_theme              = "sikalabs"
+  reset_password_allowed   = true
+  remember_me              = true
 }
 
 resource "keycloak_realm_events" "sikalabs" {
