@@ -57,3 +57,11 @@ resource "grafana_data_source" "ondrejsika-manual-prometheus-panda-ingress-os" {
   name     = "prometheus-panda-ingress-os"
   url      = "https://prometheus-ingress.panda.k8s.oxs.cz"
 }
+
+resource "grafana_data_source" "ondrejsika-manual-prometheus-debora" {
+  provider = grafana.ondrejsika-manual
+  type     = "prometheus"
+  uid      = "ondrejsika-manual-prometheus-debora"
+  name     = "Kubernetes Debora"
+  url      = "https://prometheus.debora.k8s.sl.zone"
+}
