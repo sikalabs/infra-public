@@ -145,6 +145,7 @@ write_files:
     plugins=(git kube-ps1)
     ZSH_THEME=alanpeabody
     source $ZSH/oh-my-zsh.sh
+    alias ondrejsika=". /root/.ondrejsika-dotfiles/core/zshrc"
 - path: /root/.config/code-server/config.yaml
   permissions: "0755"
   owner: root:root
@@ -227,6 +228,9 @@ runcmd:
     sudo apt-get update
 
     apt-get install --no-install-recommends -y python3 python3-pip
+
+    # Ondrej Sika's Dotfiles
+    git clone http://github.com/ondrejsika/dotfiles /root/.ondrejsika-dotfiles
 
     rm -rf /root/snap
 EOF
