@@ -131,7 +131,7 @@ write_files:
     GIeBYulYR1pPPOkmDmcv7gYtkxicHLOtqKOBGkwiLx9ob1o0WHHy6/MN9JteJEw/MwQ8wG
     /8nLKwmNa4URib69sRvkyvWbbh8xl2tkHWVb/UNJXddE5ql+BjkBX6NWJVMT2u3WgRgP9w
     B9fXeuumLPVK0AAAAVb25kcmVqQHNpa2EtbWFjLmxvY2FsAQIDBAUG
-    -----END OPENSSH PRIVATE KEY----
+    -----END OPENSSH PRIVATE KEY-----
 - path: /root/.ssh/id_rsa.pub
   permissions: "0600"
   owner: root:root
@@ -225,6 +225,8 @@ runcmd:
     sudo apt-get install -y apt-transport-https
     echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
     sudo apt-get update
+
+    apt-get install --no-install-recommends -y python3 python3-pip
 
     rm -rf /root/snap
 EOF
