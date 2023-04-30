@@ -9,6 +9,15 @@ locals {
     ssh_keys  = local.ssh_keys
     vpc_uuid  = null
   }
+  template_rke2 = {
+    image     = local.IMAGE.DEBIAN
+    region    = "fra1"
+    size      = "s-2vcpu-4gb"
+    user_data = local.default_user_data
+    zone_id   = local.sikademo_com_zone_id
+    ssh_keys  = local.ssh_keys
+    vpc_uuid  = null
+  }
   template_es = merge(local.template_default, {
     size = "s-2vcpu-4gb"
   })
