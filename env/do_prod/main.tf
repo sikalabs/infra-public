@@ -1,0 +1,3 @@
+module "vms" {
+  source = "./vms"
+}
