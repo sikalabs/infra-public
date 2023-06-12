@@ -9,6 +9,9 @@ locals {
     ssh_keys  = local.ssh_keys
     vpc_uuid  = null
   }
+  template_consul = merge(local.template_default, {
+    user_data = local.consul_user_data
+  })
   template_rke2 = {
     image     = local.IMAGE.DEBIAN
     region    = "fra1"
@@ -59,6 +62,18 @@ runcmd:
     apt-get update
     apt-get install -y curl sudo git mc htop vim tree
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+EOF
+  consul_user_data  = <<EOF
+#cloud-config
+runcmd:
+  - |
+    rm -rf /etc/update-motd.d/99-one-click
+    apt-get update
+    apt-get install -y curl sudo git mc htop vim tree
+    curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+    systemctl stop ufw
+    systemctl disable ufw
+    slu install-bin consul
 EOF
   user_data_rke1    = <<EOF
 #cloud-config
