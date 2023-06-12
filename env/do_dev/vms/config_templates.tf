@@ -256,6 +256,9 @@ runcmd:
     # Ondrej Sika's Dotfiles
     git clone http://github.com/ondrejsika/dotfiles /root/.ondrejsika-dotfiles
 
+    slu install-bin consul
+    slu install-bin prometheus
+
     rm -rf /root/snap
 EOF
 }
