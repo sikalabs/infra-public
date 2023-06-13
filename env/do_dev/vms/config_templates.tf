@@ -259,6 +259,9 @@ runcmd:
     slu install-bin consul
     slu install-bin prometheus
 
+    slu install-bin kubectx
+    slu install-bin kubens
+
     rm -rf /root/snap
 EOF
 }
