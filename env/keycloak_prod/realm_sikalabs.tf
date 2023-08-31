@@ -9,6 +9,12 @@ resource "keycloak_realm" "sikalabs" {
 }
 
 resource "keycloak_realm_events" "sikalabs" {
+  lifecycle {
+    ignore_changes = [
+      "events_listeners",
+    ]
+  }
+
   realm_id = keycloak_realm.sikalabs.id
 
   events_enabled    = true
