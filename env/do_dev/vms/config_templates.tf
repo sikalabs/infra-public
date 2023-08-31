@@ -9,6 +9,9 @@ locals {
     ssh_keys  = local.ssh_keys
     vpc_uuid  = null
   }
+  template_docker = merge(local.template_default, {
+    image = local.IMAGE.DOCKER
+  })
   template_consul = merge(local.template_default, {
     user_data = local.consul_user_data
   })
