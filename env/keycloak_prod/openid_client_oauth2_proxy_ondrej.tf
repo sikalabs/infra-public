@@ -23,3 +23,10 @@ resource "keycloak_openid_client_default_scopes" "oauth2_proxy_ondrej" {
     keycloak_openid_client_scope.sikalabs_groups.name,
   ]
 }
+
+resource "keycloak_openid_audience_protocol_mapper" "oauth2_proxy_ondrej" {
+  realm_id                 = keycloak_realm.sikalabs.id
+  client_id                = keycloak_openid_client.oauth2_proxy_ondrej.id
+  name                     = "audience-mapper"
+  included_client_audience = keycloak_openid_client.oauth2_proxy_ondrej.client_id
+}
