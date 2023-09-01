@@ -11,7 +11,7 @@ resource "keycloak_realm" "ondrejsika" {
 resource "keycloak_realm_events" "ondrejsika" {
   lifecycle {
     ignore_changes = [
-      "events_listeners",
+      events_listeners,
     ]
   }
 
