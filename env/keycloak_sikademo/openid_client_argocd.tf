@@ -10,6 +10,9 @@ resource "keycloak_openid_client" "argocd" {
   valid_redirect_uris = [
     "*",
   ]
+  valid_post_logout_redirect_uris = [
+    "*",
+  ]
 }
 
 resource "keycloak_openid_client_default_scopes" "argocd" {
