@@ -17,3 +17,8 @@ resource "keycloak_group" "argocd-foo" {
   realm_id = keycloak_realm.sikademo.id
   name     = "argocd-foo"
 }
+
+resource "keycloak_group" "vault-admin" {
+  realm_id = keycloak_realm.sikademo.id
+  name     = "vault-admin"
+}
