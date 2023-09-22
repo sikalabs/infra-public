@@ -18,3 +18,22 @@ module "cnc" {
     }
   }
 }
+
+module "ducr" {
+  source = "./modules/slts"
+
+  name             = "ducr"
+  initial_password = var.initial_password
+  users = {
+    "ondrej" = {
+      email      = "ondrej@ducr.slts.uk"
+      first_name = "Ondrej"
+      last_name  = "Sika"
+    }
+    "vpn" = {
+      email      = "vpn@ducr.slts.uk"
+      first_name = "VPN"
+      last_name  = "VPN"
+    }
+  }
+}
