@@ -5,6 +5,7 @@
 !*.EXAMPLE.tfvars
 *.tfstate
 *.tfstate*backup
+*.tfplan
 *.log
 .terraform.tfstate.lock.info
 .infracost
