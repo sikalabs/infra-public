@@ -242,6 +242,7 @@ runcmd:
 
     # Terraform
     slu install-bin terraform
+    echo "alias tf=terraform" >> /root/.zshrc
 
     # Aliases
     echo 'alias w="watch -n 0.3 "' >> /root/.zshrc
