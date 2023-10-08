@@ -180,6 +180,7 @@ write_files:
     auth: password
     password: asdfasdf2020
     cert: false
+    bind-addr: 0.0.0.0:8080
 - path: /root/.local/share/code-server/User/settings.json
   permissions: "0755"
   owner: root:root
