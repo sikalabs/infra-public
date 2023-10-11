@@ -267,6 +267,9 @@ runcmd:
     slu install-bin kubectx
     slu install-bin kubens
 
+    # AzureCLI
+    echo 'alias install-az="curl -L https://aka.ms/InstallAzureCli | bash"' >> /root/.zshrc
+
     rm -rf /root/snap
 EOF
 }
