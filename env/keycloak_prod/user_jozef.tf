@@ -17,5 +17,6 @@ resource "keycloak_user_groups" "jozefvojtek" {
   user_id  = keycloak_user.jozefvojtek.id
   group_ids = [
     keycloak_group.argocd-admin.id,
+    keycloak_group.cra-admins.id,
   ]
 }

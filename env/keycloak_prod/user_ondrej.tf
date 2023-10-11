@@ -18,5 +18,6 @@ resource "keycloak_user_groups" "ondrej" {
   group_ids = [
     keycloak_group.argocd-admin.id,
     keycloak_group.harbor-admins.id,
+    keycloak_group.cra-admins.id,
   ]
 }
