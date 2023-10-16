@@ -16,3 +16,5 @@ kubeconfig.*
 !.keep
 
 node_modules
+
+*.local.txt
