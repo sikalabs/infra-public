@@ -22,3 +22,8 @@ resource "keycloak_group" "vault-admin" {
   realm_id = keycloak_realm.sikademo.id
   name     = "vault-admin"
 }
+
+resource "keycloak_group" "okd_admin" {
+  realm_id = keycloak_realm.sikademo.id
+  name     = "okd-admin"
+}
