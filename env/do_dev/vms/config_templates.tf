@@ -24,6 +24,15 @@ locals {
     ssh_keys  = local.ssh_keys
     vpc_uuid  = null
   }
+  template_rke2_emad = {
+    image     = local.IMAGE.DEBIAN
+    region    = "fra1"
+    size      = "s-2vcpu-4gb"
+    user_data = local.default_user_data_emad
+    zone_id   = local.sikademo_com_zone_id
+    ssh_keys  = local.ssh_keys
+    vpc_uuid  = null
+  }
   template_es = merge(local.template_default, {
     size = "s-2vcpu-4gb"
   })
@@ -57,7 +66,7 @@ EOF
     record_name  = "lab"
     user_data    = local.lab_user_data
   })
-  default_user_data = <<EOF
+  default_user_data      = <<EOF
 #cloud-config
 runcmd:
   - |
@@ -66,7 +75,17 @@ runcmd:
     apt-get install -y curl sudo git mc htop vim tree
     curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
 EOF
-  consul_user_data  = <<EOF
+  default_user_data_emad = <<EOF
+#cloud-config
+runcmd:
+  - |
+    rm -rf /etc/update-motd.d/99-one-click
+    echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClalhUbYLKno7EPL8zsPj7pabTMGoyY/Ky88GK28SPVvxEy83vlv6fKlLYm8dTm4pWBtqJ0jPkmzgGFsavaV1BuX302qKa+v/Sv+ykC2k9zB0TV/2vkon8VkZoR2Tlyxp0NQ4V7CH9V1NUQxNdYhbQPeBxXwK7bgvwDHXgDKtgfsMt4Ij1r/my++5Cr3ZHtDTYb560wpIIggiZ6t/NsAjyepPc+ZbZkDzrui2A5T7g1OXtdq4nG1XDCffN3shL+hjj3AAjgNs6dVm/zAKIKGwNgOTwftLJv47JkcQe901G0eM10Ts5DpIJQPW/XTJUSj65BwjhY7Y/3YMdnxHrgcTbNKacFpgbdpFfCJ1ghdGmw+A4pp5DNB7YgEeDRJ3QIWuueif3SX2zeGi4Cm39kCUyS5ziJgePTvzGCspFvp4ox5Xm9phatyN7DsCNWvRI6w1cjcZFRn3Um6CFcXm5Sjs8wgafNVm88BzJRkQFCW04bO5qAj4x1HuZYhBNdWqOvgs= lab" >> /root/.ssh/authorized_keys
+    apt-get update
+    apt-get install -y curl sudo git mc htop vim tree
+    curl -fsSL https://raw.githubusercontent.com/sikalabs/slu/master/install.sh | sudo sh
+EOF
+  consul_user_data       = <<EOF
 #cloud-config
 runcmd:
   - |
@@ -78,7 +97,7 @@ runcmd:
     systemctl disable ufw
     slu install-bin consul
 EOF
-  user_data_rke1    = <<EOF
+  user_data_rke1         = <<EOF
 #cloud-config
 runcmd:
   - |
@@ -89,7 +108,7 @@ runcmd:
     systemctl stop ufw
     systemctl disable ufw
 EOF
-  nfs_user_data     = <<EOF
+  nfs_user_data          = <<EOF
 #cloud-config
 runcmd:
   - |
@@ -103,7 +122,7 @@ runcmd:
     echo '/nfs *(rw,no_root_squash,insecure)' > /etc/exports
     systemctl restart nfs-kernel-server
 EOF
-  lab_user_data     = <<EOF
+  lab_user_data          = <<EOF
 #cloud-config
 ssh_pwauth: yes
 password: asdfasdf2020
@@ -232,6 +251,8 @@ runcmd:
     # Kubernetes
     slu install-bin kubectl
     slu install-bin helm
+    slu install-bin k9s
+    slu install-bin training-cli
 
     echo "source <(kubectl completion zsh)" >> /root/.zshrc
     echo "source <(helm completion zsh)" >> /root/.zshrc
@@ -269,7 +290,14 @@ runcmd:
 
     # AzureCLI
     echo 'alias install-az="curl -L https://aka.ms/InstallAzureCli | bash"' >> /root/.zshrc
+    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
     rm -rf /root/snap
+
+    # git clone http://github.com/ondrejsika/elk-training /training
+    # training-cli k connect
+    install-slu i -v v0.76.0-dev-2
+    slu ib kubelogin
+    git clone https://github.com/ondrejsika/aks-training /root/training
 EOF
 }
