@@ -200,7 +200,7 @@ write_files:
     password: asdfasdf2020
     cert: false
     bind-addr: 0.0.0.0:8080
-- path: /root/.local/share/code-server/User/settings.json
+- path: /root/.local/share/code-server/Machine/settings.json
   permissions: "0755"
   owner: root:root
   content: |
@@ -230,8 +230,10 @@ runcmd:
     # code-server
     curl -fsSL https://code-server.dev/install.sh | HOME=/root sh
     systemctl enable --now code-server@root
-    docker run -d --name proxy-80-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :80 -r 127.0.0.1:8080
+    # docker run -d --name proxy-80-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :80 -r 127.0.0.1:8080
     docker run -d --name proxy-81-8080 --net host sikalabs/slu:v0.50.0 slu proxy tcp -l :81 -r 127.0.0.1:8080
+
+    docker run --name proxy-https -d --net host -e DOMAIN=`hostname`.sikademo.com -e PROXY_URL=http://127.0.0.1:8080 sikalabs/https-proxy-using-caddy
 
     # apt-get install
     apt install -y sudo git mc redis-tools htop vim tree make
@@ -296,8 +298,14 @@ runcmd:
 
     # git clone http://github.com/ondrejsika/elk-training /training
     # training-cli k connect
-    install-slu i -v v0.76.0-dev-2
+    # install-slu i -v v0.xxx.0-dev-xxx
     slu ib kubelogin
-    git clone https://github.com/ondrejsika/aks-training /root/training
+
+    mkdir /root/training
+
+    git clone https://github.com/ondrejsika/docker-training /root/training/docker
+    git clone https://github.com/ondrejsika/kubernetes-training /root/training/k8s
+    git clone https://github.com/ondrejsika/aks-training /root/training/aks
+
 EOF
 }
